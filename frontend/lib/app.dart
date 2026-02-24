@@ -18,8 +18,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthCubit>.value(value: Injection.authCubit),
-        BlocProvider<AdminUsersCubit>.value(value: Injection.adminUsersCubit),
+        BlocProvider<AuthCubit>.value(value: sl<AuthCubit>()),
+        BlocProvider<AdminUsersCubit>.value(value: sl<AdminUsersCubit>()),
       ],
       child: MaterialApp(
         title: 'Auth App',

@@ -18,9 +18,10 @@ class ApiConstants {
   }
 
   // Auth
-  static const String login = '/auth/login';
+  static const String login = '/auth/login'; // backend
   static const String register = '/auth/register';
   static const String me = '/auth/me';
+  static const String logout = '/auth/logout';
 
   // Admin
   static const String adminUsers = '/admin/users';

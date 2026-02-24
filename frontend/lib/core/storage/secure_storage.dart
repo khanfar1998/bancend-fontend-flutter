@@ -2,7 +2,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../constants/api_constants.dart';
 
-/// Secure storage for access token (Flutter Secure Storage).
 abstract class SecureStorage {
   Future<String?> getAccessToken();
   Future<void> setAccessToken(String token);
@@ -12,9 +11,11 @@ abstract class SecureStorage {
 
 class SecureStorageImpl implements SecureStorage {
   SecureStorageImpl({FlutterSecureStorage? storage})
-      : _storage = storage ?? const FlutterSecureStorage(
-          aOptions: AndroidOptions(encryptedSharedPreferences: true),
-        );
+    : _storage =
+          storage ??
+          const FlutterSecureStorage(
+            aOptions: AndroidOptions(encryptedSharedPreferences: true),
+          );
 
   final FlutterSecureStorage _storage;
 

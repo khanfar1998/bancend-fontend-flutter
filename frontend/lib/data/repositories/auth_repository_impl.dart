@@ -37,4 +37,5 @@ class AuthRepositoryImpl implements AuthRepository {
     final token = await _storage.getAccessToken();
     return token != null && token.isNotEmpty;
   }
+
 }

@@ -1,4 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get_it/get_it.dart';
 
 import 'core/constants/api_constants.dart';
 import 'core/network/dio_client.dart';
@@ -12,37 +13,54 @@ import 'domain/repositories/auth_repository.dart';
 import 'presentation/admin/cubit/admin_users_cubit.dart';
 import 'presentation/auth/cubit/auth_cubit.dart';
 
-/// Simple service locator for dependencies.
-class Injection {
-  Injection._();
+final GetIt sl = GetIt.instance;
 
-  static final SecureStorage _secureStorage = SecureStorageImpl(
+Future<void> setupInjection() async {
+
+  // Core
+  sl.registerLazySingleton<SecureStorage>(
+      ()=>SecureStorageImpl(
     storage: const FlutterSecureStorage(
-      aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      aOptions: AndroidOptions(encryptedSharedPreferences: true)
+    ),
+      )
+  );
+  sl.registerLazySingleton<DioClient>(
+      ()=>DioClient(secureStorage: sl<SecureStorage>(), baseUrl: ApiConstants.baseUrl)
+  );
+
+  // Data sources
+  sl.registerLazySingleton<AuthRemoteDataSource>(
+    () => AuthRemoteDataSourceImpl(
+      dio: sl<DioClient>().dio,
+      secureStorage: sl<SecureStorage>(),
     ),
   );
 
-  static final DioClient _dioClient = DioClient(
-    secureStorage: _secureStorage,
-    baseUrl: ApiConstants.baseUrl,
+  sl.registerLazySingleton<AdminUsersRemoteDataSource>(
+    () => AdminUsersRemoteDataSourceImpl(dio: sl<DioClient>().dio),
   );
 
-  static AuthRepository get _authRepository => AuthRepositoryImpl(
-        remoteDataSource: AuthRemoteDataSourceImpl(
-          dio: _dioClient.dio,
-          secureStorage: _secureStorage,
-        ),
-        secureStorage: _secureStorage,
-      );
+  // Repositories
+  sl.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(
+      remoteDataSource: sl<AuthRemoteDataSource>(),
+      secureStorage: sl<SecureStorage>(),
+    ),
+  );
 
-  static AdminUsersRepository get _adminUsersRepository =>
-      AdminUsersRepositoryImpl(
-        remoteDataSource: AdminUsersRemoteDataSourceImpl(dio: _dioClient.dio),
-      );
+  sl.registerLazySingleton<AdminUsersRepository>(
+    () => AdminUsersRepositoryImpl(
+      remoteDataSource: sl<AdminUsersRemoteDataSource>(),
+    ),
+  );
 
-  static final AuthCubit authCubit =
-      AuthCubit(authRepository: _authRepository);
+  // Cubits (singleton so auth state is shared app-wide)
+  sl.registerLazySingleton<AuthCubit>(
+    () => AuthCubit(authRepository: sl<AuthRepository>()),
+  );
 
-  static final AdminUsersCubit adminUsersCubit =
-      AdminUsersCubit(adminUsersRepository: _adminUsersRepository);
+  sl.registerLazySingleton<AdminUsersCubit>(
+    () => AdminUsersCubit(adminUsersRepository: sl<AdminUsersRepository>()),
+  );
 }

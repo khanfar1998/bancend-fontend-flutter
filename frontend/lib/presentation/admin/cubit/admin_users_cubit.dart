@@ -8,8 +8,8 @@ part 'admin_users_state.dart';
 
 class AdminUsersCubit extends Cubit<AdminUsersState> {
   AdminUsersCubit({required AdminUsersRepository adminUsersRepository})
-      : _repo = adminUsersRepository,
-        super(const AdminUsersState.initial());
+    : _repo = adminUsersRepository,
+      super(const AdminUsersState.initial());
 
   final AdminUsersRepository _repo;
 

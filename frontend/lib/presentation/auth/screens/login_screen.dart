@@ -33,6 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (mounted) Navigator.of(context).pushReplacementNamed('/home');
     } catch (_) {
       if (mounted) {
+        print((context.read<AuthCubit>().state as AuthError).message);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(

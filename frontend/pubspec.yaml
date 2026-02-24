@@ -43,6 +43,9 @@ dependencies:
   # Value equality
   equatable: ^2.0.5
 
+  # Dependency injection
+  get_it: ^8.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

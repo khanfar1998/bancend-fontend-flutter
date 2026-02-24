@@ -27,9 +27,16 @@ class AdminUsersRemoteDataSourceImpl implements AdminUsersRemoteDataSource {
 
   final Dio dio;
 
+  static void _checkUnauthorized(Response response) {
+    if (response.statusCode == 401) {
+      throw Exception('Session expired. Please sign in again.');
+    }
+  }
+
   @override
   Future<List<UserModel>> getUsers() async {
     final response = await dio.get<List<dynamic>>(ApiConstants.adminUsers);
+    _checkUnauthorized(response);
     final list = response.data;
     if (list == null) return [];
     return list
@@ -42,6 +49,7 @@ class AdminUsersRemoteDataSourceImpl implements AdminUsersRemoteDataSource {
     final response = await dio.get<Map<String, dynamic>>(
       ApiConstants.adminUserById(userId),
     );
+    _checkUnauthorized(response);
     final data = response.data;
     if (data == null) throw Exception('User not found');
     return UserModel.fromJson(data);
@@ -61,6 +69,7 @@ class AdminUsersRemoteDataSourceImpl implements AdminUsersRemoteDataSource {
         'password': password,
       },
     );
+    _checkUnauthorized(response);
     final data = response.data;
     if (data == null) throw Exception('Invalid create user response');
     return UserModel.fromJson(data);
@@ -86,6 +95,7 @@ class AdminUsersRemoteDataSourceImpl implements AdminUsersRemoteDataSource {
       ApiConstants.adminUserById(userId),
       data: body,
     );
+    _checkUnauthorized(response);
     final data = response.data;
     if (data == null) throw Exception('Invalid update user response');
     return UserModel.fromJson(data);
@@ -93,6 +103,7 @@ class AdminUsersRemoteDataSourceImpl implements AdminUsersRemoteDataSource {
 
   @override
   Future<void> deleteUser(String userId) async {
-    await dio.delete(ApiConstants.adminUserById(userId));
+    final response = await dio.delete(ApiConstants.adminUserById(userId));
+    _checkUnauthorized(response);
   }
 }

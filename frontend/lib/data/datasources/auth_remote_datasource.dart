@@ -50,6 +50,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<UserModel?> getMe() async {
     final response = await dio.get<Map<String, dynamic>>(ApiConstants.me);
+    if (response.statusCode == 401) return null; // Token expired or invalid
     final data = response.data;
     if (data == null) return null;
     return UserModel.fromJson(data);
