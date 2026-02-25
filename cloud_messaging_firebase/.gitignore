@@ -43,3 +43,4 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/assets/money-manager-3a90b-4e8cb1c3d14d.json
