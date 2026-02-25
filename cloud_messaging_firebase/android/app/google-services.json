@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "308763659568",
+    "firebase_url": "https://money-manager-3a90b-default-rtdb.firebaseio.com",
+    "project_id": "money-manager-3a90b",
+    "storage_bucket": "money-manager-3a90b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308763659568:android:c1a5266a35b55993b18cf5",
+        "android_client_info": {
+          "package_name": "com.example.cloud_messaging_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308763659568-8pt7pgl9fnnai2060hd8eu488fmnv6ns.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIulOnPSb2iq5ewXBj1gO_pr-l5Y07IYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308763659568-8pt7pgl9fnnai2060hd8eu488fmnv6ns.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "308763659568-5im8qgp4g9apsnbfuhus0r3g7s9anejo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.connectToFirestore"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308763659568:android:7427c7f06ae41dc6b18cf5",
+        "android_client_info": {
+          "package_name": "com.example.connect_to_firestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308763659568-8pt7pgl9fnnai2060hd8eu488fmnv6ns.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIulOnPSb2iq5ewXBj1gO_pr-l5Y07IYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308763659568-8pt7pgl9fnnai2060hd8eu488fmnv6ns.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "308763659568-5im8qgp4g9apsnbfuhus0r3g7s9anejo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.connectToFirestore"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
