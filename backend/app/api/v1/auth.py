@@ -57,3 +57,10 @@ def me(current_user: CurrentUser):
         role=current_user.role,
         is_active=current_user.is_active,
     )
+
+
+@router.get('/logout', response_model=Token)
+def logout(current_user: CurrentUser):
+    return {
+        'access_token': current_user.access_token,
+    }
