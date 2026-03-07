@@ -21,7 +21,7 @@ final class AdminUsersLoading extends AdminUsersState {
   const AdminUsersLoading();
 }
 
-final class AdminUsersLoaded extends AdminUsersState {
+class AdminUsersLoaded extends AdminUsersState {
   const AdminUsersLoaded(this.users);
   final List<User> users;
 

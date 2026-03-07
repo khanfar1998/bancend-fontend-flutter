@@ -17,7 +17,7 @@ class AdminUsersCubit extends Cubit<AdminUsersState> {
     emit(const AdminUsersState.loading());
     try {
       final users = await _repo.getUsers();
-      emit(AdminUsersState.loaded(users));
+      emit(AdminUsersLoaded(users));
     } catch (e) {
       emit(AdminUsersState.error(e.toString()));
     }
